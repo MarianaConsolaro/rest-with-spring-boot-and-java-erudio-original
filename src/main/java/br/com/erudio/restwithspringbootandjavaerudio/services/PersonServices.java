@@ -8,6 +8,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import br.com.erudio.restwithspringbootandjavaerudio.controllers.PersonController;
 import br.com.erudio.restwithspringbootandjavaerudio.data.vo.v1.PersonVO;
+import br.com.erudio.restwithspringbootandjavaerudio.exceptions.RequiredObjectIsNullException;
 import br.com.erudio.restwithspringbootandjavaerudio.exceptions.ResourceNotFoundException;
 import br.com.erudio.restwithspringbootandjavaerudio.mapper.DozerMapper;
 import br.com.erudio.restwithspringbootandjavaerudio.model.Person;
@@ -49,7 +50,7 @@ public class PersonServices {
 
     public PersonVO create(PersonVO person) {
 
-        //if (person == null) throw new RequiredObjectIsNullException();
+        if (person == null) throw new RequiredObjectIsNullException();
 
         logger.info("Creating one person!");
         var entity = DozerMapper.parseObject(person, Person.class);
@@ -60,7 +61,7 @@ public class PersonServices {
 
     public PersonVO update(PersonVO person) {
 
-        //if (person == null) throw new RequiredObjectIsNullException();
+        if (person == null) throw new RequiredObjectIsNullException();
 
         logger.info("Updating one person!");
 
