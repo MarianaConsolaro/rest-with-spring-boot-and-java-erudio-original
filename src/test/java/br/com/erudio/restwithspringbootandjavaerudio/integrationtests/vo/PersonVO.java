@@ -1,4 +1,5 @@
-package br.com.erudio.restwithspringbootandjavaerudio.configs.integrationstests.vo;
+package br.com.erudio.restwithspringbootandjavaerudio.integrationtests.vo;
+
 
 import java.io.Serializable;
 
