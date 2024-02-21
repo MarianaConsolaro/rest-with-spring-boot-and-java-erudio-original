@@ -1,4 +1,4 @@
-package br.com.erudio.restwithspringbootandjavaerudio.security.jwt;
+package br.com.erudio.restwithspringbootandjavaerudio.securityJwt;
 
 import java.io.IOException;
 

@@ -1,20 +1,26 @@
 package br.com.erudio.restwithspringbootandjavaerudio.integrationtests.vo;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.io.Serial;
 import java.io.Serializable;
 
-
+@XmlRootElement
 public class PersonVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private Long id; // Alterando o atributo de id para Key(chave);
+
     private String firstName;
+
     private String lastName;
     private String address;
     private String gender;
 
-    public PersonVO() {}
+
+    public PersonVO() {} // Constructor padrão que o JPA exige.
 
     public Long getId() {
         return id;
@@ -39,7 +45,6 @@ public class PersonVO implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     public String getAddress() {
         return address;
     }
@@ -47,7 +52,6 @@ public class PersonVO implements Serializable {
     public void setAddress(String address) {
         this.address = address;
     }
-
     public String getGender() {
         return gender;
     }
@@ -56,52 +60,29 @@ public class PersonVO implements Serializable {
         this.gender = gender;
     }
 
+
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PersonVO personVO)) return false;
+
+        if (getId() != null ? !getId().equals(personVO.getId()) : personVO.getId() != null) return false;
+        if (getFirstName() != null ? !getFirstName().equals(personVO.getFirstName()) : personVO.getFirstName() != null)
+            return false;
+        if (getLastName() != null ? !getLastName().equals(personVO.getLastName()) : personVO.getLastName() != null)
+            return false;
+        if (getAddress() != null ? !getAddress().equals(personVO.getAddress()) : personVO.getAddress() != null)
+            return false;
+        return getGender() != null ? getGender().equals(personVO.getGender()) : personVO.getGender() == null;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        PersonVO other = (PersonVO) obj;
-        if (address == null) {
-            if (other.address != null)
-                return false;
-        } else if (!address.equals(other.address))
-            return false;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
-        if (gender == null) {
-            if (other.gender != null)
-                return false;
-        } else if (!gender.equals(other.gender))
-            return false;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (lastName == null) {
-            if (other.lastName != null)
-                return false;
-        } else if (!lastName.equals(other.lastName))
-            return false;
-        return true;
+    public int hashCode() {
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getFirstName() != null ? getFirstName().hashCode() : 0);
+        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (getGender() != null ? getGender().hashCode() : 0);
+        return result;
     }
 }

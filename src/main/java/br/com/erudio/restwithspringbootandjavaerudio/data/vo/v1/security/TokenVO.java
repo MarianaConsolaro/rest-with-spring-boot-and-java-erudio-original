@@ -1,11 +1,13 @@
 package br.com.erudio.restwithspringbootandjavaerudio.data.vo.v1.security;
 
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
-public class TokenVO implements Serializable{
+public class TokenVO implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String username;
@@ -15,15 +17,15 @@ public class TokenVO implements Serializable{
     private String accessToken;
     private String refreshToken;
 
+
     public TokenVO() {}
 
-    public TokenVO(
-            String username,
-            Boolean authenticated,
-            Date created,
-            Date expiration,
-            String accessToken,
-            String refreshToken) {
+    public TokenVO(String username,
+                   Boolean authenticated,
+                   Date created,
+                   Date expiration,
+                   String accessToken,
+                   String refreshToken) {
         this.username = username;
         this.authenticated = authenticated;
         this.created = created;

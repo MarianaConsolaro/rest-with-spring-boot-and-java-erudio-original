@@ -1,9 +1,11 @@
 package br.com.erudio.restwithspringbootandjavaerudio.services;
 
+
 import br.com.erudio.restwithspringbootandjavaerudio.data.vo.v1.security.AccountCredentialsVO;
 import br.com.erudio.restwithspringbootandjavaerudio.data.vo.v1.security.TokenVO;
 import br.com.erudio.restwithspringbootandjavaerudio.repositories.UserRepository;
-import br.com.erudio.restwithspringbootandjavaerudio.security.jwt.JwtTokenProvider;
+import br.com.erudio.restwithspringbootandjavaerudio.securityJwt.JwtTokenProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,15 +14,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class AuthServices {
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Autowired // Obtendo a injeção de diversos serviços:
     private JwtTokenProvider tokenProvider;
 
     @Autowired
@@ -28,7 +28,7 @@ public class AuthServices {
 
     @SuppressWarnings("rawtypes")
     public ResponseEntity signin(AccountCredentialsVO data) {
-        try {
+        try{
             var username = data.getUsername();
             var password = data.getPassword();
             authenticationManager.authenticate(
@@ -39,6 +39,7 @@ public class AuthServices {
             var tokenResponse = new TokenVO();
             if (user != null) {
                 tokenResponse = tokenProvider.createAccessToken(username, user.getRoles());
+
             } else {
                 throw new UsernameNotFoundException("Username " + username + " not found!");
             }
@@ -60,7 +61,5 @@ public class AuthServices {
         }
         return ResponseEntity.ok(tokenResponse);
     }
+
 }
-
-
-
