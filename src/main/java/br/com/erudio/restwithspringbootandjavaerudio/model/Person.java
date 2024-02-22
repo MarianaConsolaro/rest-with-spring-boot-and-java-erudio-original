@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class Person implements Serializable {
 
     @Serial
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,9 @@ public class Person implements Serializable {
     private String address;
     @Column(nullable = false, length = 6)
     private String gender;
+
+    @Column(nullable = false)
+    private Boolean enabled;
 
 
     public Person() {} // Constructor padrão que o JPA exige.
@@ -65,6 +68,15 @@ public class Person implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
 
