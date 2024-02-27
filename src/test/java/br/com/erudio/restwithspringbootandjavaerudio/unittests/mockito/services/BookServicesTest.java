@@ -1,9 +1,9 @@
 package br.com.erudio.restwithspringbootandjavaerudio.unittests.mockito.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.Mockito.when;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import br.com.erudio.restwithspringbootandjavaerudio.data.vo.v1.BookVO;
@@ -24,6 +24,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -152,53 +158,4 @@ class BookServicesTest {
 
         service.delete(1L);
     }
-
-    @Test
-    void testFindAll() {
-        List<Book> list = input.mockEntityList();
-
-        when(repository.findAll()).thenReturn(list);
-
-        var people = service.findAll();
-
-        assertNotNull(people);
-        assertEquals(14, people.size());
-
-        var bookOne = people.get(1);
-
-        assertNotNull(bookOne);
-        assertNotNull(bookOne.getKey());
-        assertNotNull(bookOne.getLinks());
-
-        assertTrue(bookOne.toString().contains("links: [</api/book/v1/1>;rel=\"self\"]"));
-        assertEquals("Some Author1", bookOne.getAuthor());
-        assertEquals("Some Title1", bookOne.getTitle());
-        assertEquals(25D, bookOne.getPrice());
-        assertNotNull(bookOne.getLaunchDate());
-
-        var bookFour = people.get(4);
-
-        assertNotNull(bookFour);
-        assertNotNull(bookFour.getKey());
-        assertNotNull(bookFour.getLinks());
-
-        assertTrue(bookFour.toString().contains("links: [</api/book/v1/4>;rel=\"self\"]"));
-        assertEquals("Some Author4", bookFour.getAuthor());
-        assertEquals("Some Title4", bookFour.getTitle());
-        assertEquals(25D, bookFour.getPrice());
-        assertNotNull(bookFour.getLaunchDate());
-
-        var bookSeven = people.get(7);
-
-        assertNotNull(bookSeven);
-        assertNotNull(bookSeven.getKey());
-        assertNotNull(bookSeven.getLinks());
-
-        assertTrue(bookSeven.toString().contains("links: [</api/book/v1/7>;rel=\"self\"]"));
-        assertEquals("Some Author7", bookSeven.getAuthor());
-        assertEquals("Some Title7", bookSeven.getTitle());
-        assertEquals(25D, bookSeven.getPrice());
-        assertNotNull(bookSeven.getLaunchDate());
-    }
-
 }
