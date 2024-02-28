@@ -41,3 +41,6 @@
 #### Implantação na Amazon AWS
 #
 #### Integração contínua na Amazon AWS com Github Action
+
+[![Docker Hub Repo](https://img.shields.io/docker/pulls/mariconsolaro/rest-with-spring-boot-erudio.svg)]
+(https://hub.docker.com/repository/docker/mariconsolaro/rest-with-spring-boot-erudio)
